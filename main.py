@@ -107,37 +107,10 @@ while True:
         update_data()
 
         screenToShow += 1
-        if screenToShow > 2:
+        if screenToShow > 1:
             screenToShow = 0
 
     if screenToShow == 0:
-
-        flip = False
-        time2 = np.arange(0, 1, 0.1)
-        screen_x_offset = np.sin((time.time() * 3.5))
-
-        if screen_x_offset < 0:
-            flip = True
-        else:
-            flip = False
-
-        pix = (int)(lerp(5, 29, abs(screen_x_offset)))
-        canvas = Image.new(imageEncoding, (frameSize))
-        image = Image.open('images/safe_logo.bmp').convert(imageEncoding)
-        if flip:
-            image = ImageOps.mirror(image)
-        image = image.resize((pix, 28), Image.ANTIALIAS)
-        canvas.paste(image, (28 - (int)(pix * 0.5) - 12, 2))
-
-        draw = ImageDraw.Draw(canvas)
-        draw.text((32, 11), "SAFEMOON", fill='white', font=splashFont)
-        draw.text((95, 32-9), "Tracker", fill='white', font=titleFont)
-
-        if (time.time() - startTime) > 8:
-            startTime = time.time()
-            screenToShow += 1
-
-    if screenToShow == 1:
         
         canvas = Image.new(imageEncoding, (frameSize))
         draw = ImageDraw.Draw(canvas)
@@ -148,7 +121,7 @@ while True:
         draw.text((0, 32-8), "=" + config.LOCAL_CURRENCY_SYMBOL, fill='white', font=currencyFont)
         draw.text((12, 32-6), "{:,.2f} @ S{:,.9f}".format((lerp(previousBalance, currentBalance, timeDelta) * lerp(previousRate, currentRate, timeDelta)) * config.LOCAL_CURRENCY, lerp(previousRate, currentRate, timeDelta)), fill='white', font=titleFont)   
 
-    if screenToShow == 2:
+    if screenToShow == 1:
 
         canvas = Image.new(imageEncoding, (frameSize))
         draw = ImageDraw.Draw(canvas)
